@@ -94,22 +94,6 @@ Public Class Frm_Principale
         End Try
     End Sub
 
-    'Private Sub Cmb_Files_TextChanged(sender As Object, e As EventArgs) Handles Cmb_Files.TextChanged
-    '    Try
-    '        Dim Rows() As DataRow = DT_File.Select("Nome LIKE '%" & ToolStripComboBox1.Text & "%'")
-
-    '        Dim AC As New AutoCompleteStringCollection
-    '        For Each R As DataRow In Rows
-    '            AC.Add(R.Item("Nome").ToString)
-    '        Next
-
-    '        ToolStripComboBox1.AutoCompleteCustomSource = Nothing
-    '        ToolStripComboBox1.AutoCompleteCustomSource = AC
-    '    Catch ex As Exception
-    '        MessageBox.Show(ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    '    End Try
-    'End Sub
-
     Private Sub Btn_WTF_Click(sender As Object, e As EventArgs) Handles Btn_WTF.Click
         Try
             Frm_About.ShowDialog()
@@ -127,30 +111,6 @@ Public Class Frm_Principale
     End Sub
 
 #Region " SUBS "
-
-    'Private Sub CaricaListaFiles()
-    '    Cmb_Files.Items.Clear()
-
-    '    Cmb_Files.Items.Add("// Seleziona un file //")
-    '    Cmb_Files.SelectedIndex = 0
-
-    '    Dim DI As New DirectoryInfo(Application.StartupPath)
-    '    Dim FIarr As FileInfo() = DI.GetFiles("*.txt")
-
-    '    For Each Fri As FileInfo In FIarr
-    '        Using FS As New FileStream(Fri.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
-    '            Using SR As New StreamReader(FS, System.Text.Encoding.Default)
-    '                Dim Lin() As String = SR.ReadToEnd.Split(Environment.NewLine)
-
-    '                If Lin.Count > 2 Then
-    '                    Dim Str As String = Fri.Name.Replace(Fri.Extension, "")
-    '                    Cmb_Files.Items.Add(Str)
-    '                    DT_File.Rows.Add(Str)
-    '                End If
-    '            End Using
-    '        End Using
-    '    Next
-    'End Sub
 
     Private Async Sub LeggiFile()
         Try
@@ -174,16 +134,6 @@ Public Class Frm_Principale
                                    Dim ColNome As String = ToolBarTop.InvocaFunzioneSicuro(Function() Cmb_CercaCol.Text.Trim)
 
                                    LineeFile = PulisciFatture(FilePath)
-
-                                   'Using FS As New FileStream(FilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
-                                   '    Using SR As New StreamReader(FS, System.Text.Encoding.Default)
-
-                                   '        Do Until SR.EndOfStream
-                                   '            Dim LineaRaw As String = SR.ReadLine().Trim
-                                   '            LineeFile.Add(LineaRaw)
-                                   '        Loop
-                                   '    End Using
-                                   'End Using
 
                                    'Pulizia datatable
                                    DT_Contenuto.Columns.Clear()
@@ -259,44 +209,6 @@ Public Class Frm_Principale
             End If
         End Try
     End Sub
-
-    Private Function CaricaContenuto(Optional Filtro As String = "") As Boolean
-        Try
-            Dim Rows_Filtrate As New List(Of DataRow)
-
-            If String.IsNullOrWhiteSpace(Filtro) Then
-                For Each Rw As DataRow In DT_Contenuto.Rows
-                    Rows_Filtrate.Add(Rw)
-                Next
-            Else
-                Dim ColNome As String = ToolBarTop.InvocaFunzioneSicuro(Function() Cmb_CercaCol.Text.Trim)
-                Rows_Filtrate = DT_Contenuto.Select(ColNome & " LIKE '%" & Filtro & "%'").ToList
-            End If
-
-            DGV_Centrale.InvocaMetodoSicuro(Sub() DGV_Centrale.Rows.Clear())
-
-            For Each R As DataRow In Rows_Filtrate
-                Dim Celle As New ArrayList From {R(0).ToString}
-
-                For C As Integer = 1 To R.ItemArray.Count - 1
-                    Celle.Add(R(C).ToString)
-                Next
-
-                DGV_Centrale.InvocaMetodoSicuro(Sub() DGV_Centrale.Rows.Add(Celle.ToArray))
-            Next
-
-            Return True
-        Catch ex As Exception
-            Throw New Exception("Errore ricerca!")
-            Return False
-        Finally
-            ToolBarTop.InvocaMetodoSicuro(Sub() Cmb_Files.Enabled = True)
-            ToolBarTop.InvocaMetodoSicuro(Sub() Btn_Cerca.Enabled = True)
-            ToolBarBottom.InvocaMetodoSicuro(Sub() Lbl_Stato.Text = "Ricerca completata!")
-            ToolBarBottom.InvocaMetodoSicuro(Sub() Lbl_Stato.ForeColor = Color.ForestGreen)
-            ToolBarBottom.InvocaMetodoSicuro(Sub() Lbl_TotRighe.Text = "Righe totali: " & DGV_Centrale.Rows.Count)
-        End Try
-    End Function
 
 #End Region
 

@@ -40,7 +40,6 @@ Partial Class Frm_Principale
         Me.Lbl_TotRighe = New System.Windows.Forms.ToolStripStatusLabel()
         Me.Lbl_TempoImpegato = New System.Windows.Forms.ToolStripStatusLabel()
         Me.UselessTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.ToolStripProgressBar1 = New System.Windows.Forms.ToolStripProgressBar()
         Me.ToolBarTop.SuspendLayout()
         CType(Me.DGV_Centrale, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolBarBottom.SuspendLayout()
@@ -145,7 +144,7 @@ Partial Class Frm_Principale
         'ToolBarBottom
         '
         Me.ToolBarBottom.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.ToolBarBottom.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Lbl_Stato, Me.Lbl_TotRighe, Me.Lbl_TempoImpegato, Me.ToolStripProgressBar1})
+        Me.ToolBarBottom.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Lbl_Stato, Me.Lbl_TotRighe, Me.Lbl_TempoImpegato})
         Me.ToolBarBottom.Location = New System.Drawing.Point(0, 608)
         Me.ToolBarBottom.Name = "ToolBarBottom"
         Me.ToolBarBottom.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
@@ -179,24 +178,18 @@ Partial Class Frm_Principale
         '
         'Lbl_TempoImpegato
         '
-        Me.Lbl_TempoImpegato.AutoSize = False
         Me.Lbl_TempoImpegato.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
             Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
             Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
         Me.Lbl_TempoImpegato.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter
         Me.Lbl_TempoImpegato.Name = "Lbl_TempoImpegato"
-        Me.Lbl_TempoImpegato.Size = New System.Drawing.Size(500, 29)
+        Me.Lbl_TempoImpegato.Size = New System.Drawing.Size(235, 29)
         Me.Lbl_TempoImpegato.Text = "Tempo impiegato (just4fun)"
         Me.Lbl_TempoImpegato.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'UselessTimer
         '
         Me.UselessTimer.Enabled = True
-        '
-        'ToolStripProgressBar1
-        '
-        Me.ToolStripProgressBar1.Name = "ToolStripProgressBar1"
-        Me.ToolStripProgressBar1.Size = New System.Drawing.Size(100, 28)
         '
         'Frm_Principale
         '
@@ -237,5 +230,4 @@ Partial Class Frm_Principale
     Friend WithEvents Lbl_TotRighe As ToolStripStatusLabel
     Friend WithEvents Lbl_TempoImpegato As ToolStripStatusLabel
     Friend WithEvents UselessTimer As Timer
-    Friend WithEvents ToolStripProgressBar1 As ToolStripProgressBar
 End Class

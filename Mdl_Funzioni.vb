@@ -62,11 +62,6 @@ Module Mdl_Funzioni
 
                     TheFile.Append(SR.ReadToEnd)
 
-                    'Do Until SR.EndOfStream
-                    '    Dim LineaRaw As String = SR.ReadLine().Trim
-                    '    TmpLst.Add(LineaRaw)
-                    'Loop
-
                     Dim NewSB1, NewSB2, NewSB3, NewSB4 As New StringBuilder
                     NewSB1.Append(Regex.Replace(TheFile.ToString, "<\?xml version([\s\S]*?)\<\/.*?FatturaElettronica>", String.Empty))
                     NewSB2.Append(Regex.Replace(NewSB1.ToString, "<p:FatturaElettronica([\s\S]*?)\<\/p:FatturaElettronica>", String.Empty))
@@ -79,18 +74,6 @@ Module Mdl_Funzioni
                         Dim LineaElab As String = TempSplit(L).Trim
 
                         TmpLst.Add(LineaElab)
-
-                        'While LineaElab.Contains("||")
-                        '    If LineaElab.EndsWith("||") Then
-                        '        LineaElab = LineaElab.Replace("||", "")
-                        '        L += 1
-                        '        Dim Merged As String = LineaElab & TempSplit(L).Trim
-                        '        TmpLst.Add(Merged)
-                        '    Else
-                        '        LineaElab = LineaElab.Replace("||", "")
-                        '        TmpLst.Add(LineaElab)
-                        '    End If
-                        'End While
                     Next
                 End Using
             End Using
