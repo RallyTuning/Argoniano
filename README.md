@@ -17,3 +17,11 @@ Per ulteriori informazioni o richieste: [Contattami](https://github.com/RallyTun
 
 #### Visualizzazione tabelle multiple
 ![Immagine 2022-03-11 120731](https://user-images.githubusercontent.com/50233545/157859188-b9585bc0-20be-4684-a520-eef1ccea7adb.png)
+
+---
+### 🖥️ Requisiti di sistema
+- Sistema a 64bit (perchè siamo nel 2022, dai!)
+- CPU 1 GHz
+- 2 GB RAM (meglio 4 GB se i backups sono di grandi dimensioni)
+- Un hard disk a caso
+- [.Net Framework 4.8](https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net48-offline-installer)
