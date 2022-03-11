@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.Argoniano.Frm_Principale
+            Me.MainForm = Global.Argoniano.Frm_Main
         End Sub
     End Class
 End Namespace

@@ -50,6 +50,9 @@
   <PropertyGroup>
     <ApplicationIcon>Martin-Berube-Character-Knight.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -82,11 +85,17 @@
     <Compile Include="Frm_About.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Frm_Principale.vb">
+    <Compile Include="Frm_Main.Designer.vb">
+      <DependentUpon>Frm_Main.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_Main.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Frm_Principale.Designer.vb">
-      <DependentUpon>Frm_Principale.vb</DependentUpon>
+    <Compile Include="Frm_View.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_View.Designer.vb">
+      <DependentUpon>Frm_View.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Mdl_Funzioni.vb" />
@@ -111,8 +120,11 @@
     <EmbeddedResource Include="Frm_About.resx">
       <DependentUpon>Frm_About.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Frm_Principale.resx">
-      <DependentUpon>Frm_Principale.vb</DependentUpon>
+    <EmbeddedResource Include="Frm_Main.resx">
+      <DependentUpon>Frm_Main.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_View.resx">
+      <DependentUpon>Frm_View.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -122,6 +134,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

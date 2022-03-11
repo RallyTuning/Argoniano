@@ -1,63 +1,38 @@
 ﻿Imports System.ComponentModel
 Imports System.IO
 
-Public Class Frm_Principale
+Public Class Frm_View
 
-    Private ReadOnly DT_File As New DataTable
+    Private ReadOnly DT_File As DataTable
     Private ReadOnly DT_Contenuto As New DataTable
 
-    Sub New()
+    Sub New(DT As DataTable)
         InitializeComponent()
+
+        DT_File = DT
+
+        Me.Text = "Argoniano - " & DT.TableName
 
         Me.Icon = My.Resources.Martin_Berube_Character_Knight
 
-        DGV_Centrale.DoubleBuffering(True)
-
-        If My.Settings.Fullscreen = FormWindowState.Maximized Then
-            Me.WindowState = FormWindowState.Maximized
+        If My.Settings.Dimensioni = New Size(0, 0) Then
+            Me.Size = New Size(1000, 800)
         Else
-            If My.Settings.Dimensioni = New Size(0, 0) Then
-                Me.Size = New Size(1000, 800)
-            Else
-                Me.Size = My.Settings.Dimensioni
-            End If
+            Me.Size = My.Settings.Dimensioni
         End If
 
-        DT_File.Columns.Add("Nome")
+        Cmb_Files.SelectedIndex = 0
+
+        DGV_Centrale.DoubleBuffering(True)
+        ToolBarTop.DoubleBuffering(True)
+        ToolBarBottom.DoubleBuffering(True)
     End Sub
 
-    Private Async Sub Frm_Principale_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+    Private Sub Frm_Principale_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Try
-            Cmb_Files.Items.Clear()
-            Cmb_Files.Items.Add("Lettura backup...")
-            Cmb_Files.SelectedIndex = 0
-
-            Dim LstFiles As New List(Of String)
-            Dim Tasko As New Task(Sub()
-                                      Dim DI As New DirectoryInfo(Application.StartupPath)
-                                      Dim FIarr As FileInfo() = DI.GetFiles("*.txt")
-
-                                      For Each Fri As FileInfo In FIarr
-                                          Using FS As New FileStream(Fri.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
-                                              Using SR As New StreamReader(FS, System.Text.Encoding.Default)
-                                                  Dim Lin() As String = SR.ReadToEnd.Split(Environment.NewLine)
-
-                                                  If Lin.Count > 2 Then
-                                                      Dim Str As String = Fri.Name.Replace(Fri.Extension, "")
-                                                      LstFiles.Add(Str)
-                                                      DT_File.Rows.Add(Str)
-                                                  End If
-                                              End Using
-                                          End Using
-                                      Next
-                                  End Sub)
-            Tasko.Start()
-            Await Tasko
-
-            Cmb_Files.Items.Clear()
-            Cmb_Files.Items.Add("Seleziona un file")
-            Cmb_Files.SelectedIndex = 0
-            Cmb_Files.Items.AddRange(LstFiles.ToArray)
+            For Each R As DataRow In DT_File.Rows
+                Cmb_Files.Items.Add(R.Item("Nome").ToString)
+            Next
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -65,7 +40,6 @@ Public Class Frm_Principale
 
     Private Sub Frm_Principale_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         Try
-            My.Settings.Fullscreen = Me.WindowState
             My.Settings.Dimensioni = Me.Size
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -76,9 +50,7 @@ Public Class Frm_Principale
         Try
             Txt_Cerca.Text = String.Empty
 
-            If Cmb_Files.SelectedIndex > 0 Then
-                LeggiFile()
-            End If
+            If Cmb_Files.SelectedIndex > 0 Then LeggiFile()
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -86,27 +58,17 @@ Public Class Frm_Principale
 
     Private Sub Btn_Cerca_Click(sender As Object, e As EventArgs) Handles Btn_Cerca.Click
         Try
-            If Cmb_Files.SelectedIndex > 0 Then
-                LeggiFile()
-            End If
+            If Cmb_Files.SelectedIndex > 0 Then LeggiFile()
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
-    Private Sub Btn_WTF_Click(sender As Object, e As EventArgs) Handles Btn_WTF.Click
+    Private Sub Txt_Cerca_KeyDown(sender As Object, e As KeyEventArgs) Handles Txt_Cerca.KeyDown
         Try
-            Frm_About.ShowDialog()
+            If e.KeyCode = Keys.Enter Then Call Btn_Cerca_Click(Nothing, Nothing)
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-    End Sub
-
-    Private Sub UselessTimer_Tick(sender As Object, e As EventArgs) Handles UselessTimer.Tick
-        Try
-            Lbl_TotRighe.Text = "Righe totali: " & DGV_Centrale.Rows.Count
-        Catch ex As Exception
-            Lbl_TotRighe.Text = "Righe totali: boh"
         End Try
     End Sub
 
@@ -115,15 +77,22 @@ Public Class Frm_Principale
     Private Async Sub LeggiFile()
         Try
             Dim FiSi As Long = 0
+
+            ToolBarTop.Enabled = False
+            Pb_Progresso.Value = 0
+            If String.IsNullOrEmpty(Txt_Cerca.Text) Then
+                Txt_Cerca.Text = "Attendere prego..."
+            End If
+            Lbl_Stato.Text = "Ricerca in corso..."
+            Lbl_TotRighe.Text = "Righe totali: ..."
+            Lbl_TempoImpegato.Text = "..."
+            Lbl_Stato.ForeColor = Color.DodgerBlue
+
             Dim Crono As New Stopwatch
             Crono.Start()
 
             Await Task.Run(Sub()
                                Try
-                                   ToolBarTop.InvocaMetodoSicuro(Sub() ToolBarTop.Enabled = False)
-                                   ToolBarBottom.InvocaMetodoSicuro(Sub() Lbl_Stato.Text = "Ricerca in corso...")
-                                   ToolBarBottom.InvocaMetodoSicuro(Sub() Lbl_Stato.ForeColor = Color.DodgerBlue)
-
                                    'Legge il file
                                    Dim LineeFile As New List(Of String)
                                    Dim FilePath As String = Application.StartupPath & "\" & ToolBarTop.InvocaFunzioneSicuro(Function() Cmb_Files.Text) & ".txt"
@@ -131,7 +100,6 @@ Public Class Frm_Principale
                                    FiSi = FI.Length 'Solo per il report finale
 
                                    Dim Filtro As String = ToolBarTop.InvocaFunzioneSicuro(Function() Txt_Cerca.Text.Trim)
-                                   Dim ColNome As String = ToolBarTop.InvocaFunzioneSicuro(Function() Cmb_CercaCol.Text.Trim)
 
                                    LineeFile = PulisciFatture(FilePath)
 
@@ -154,27 +122,35 @@ Public Class Frm_Principale
                                    'Crea colonne listview e combobox
                                    DGV_Centrale.InvocaMetodoSicuro(Sub() DGV_Centrale.Columns.Clear())
                                    DGV_Centrale.InvocaMetodoSicuro(Sub() DGV_Centrale.Rows.Clear())
-                                   ToolBarTop.InvocaMetodoSicuro(Sub() Cmb_CercaCol.Items.Clear())
 
                                    For Each Col As DataColumn In DT_Contenuto.Columns
-                                       ToolBarTop.InvocaMetodoSicuro(Sub() Cmb_CercaCol.Items.Add(Col.ColumnName))
                                        DGV_Centrale.InvocaMetodoSicuro(Sub() DGV_Centrale.Columns.Add(Col.ColumnName, Col.ColumnName))
                                    Next
-
-                                   DGV_Centrale.InvocaMetodoSicuro(Sub() Cmb_CercaCol.SelectedIndex = 0)
+                                   DGV_Centrale.InvocaMetodoSicuro(Sub() DGV_Centrale.Columns(DGV_Centrale.Columns.Count - 1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill)
 
                                    'Carica il contenuto del datatable
                                    Dim Rows_Filtrate As New List(Of DataRow)
 
-                                   If String.IsNullOrWhiteSpace(Filtro) Then
+                                   If String.IsNullOrWhiteSpace(Filtro) Or String.Equals(Filtro, "Attendere prego...") Then
                                        For Each Rw As DataRow In DT_Contenuto.Rows
                                            Rows_Filtrate.Add(Rw)
                                        Next
                                    Else
-                                       Rows_Filtrate = DT_Contenuto.Select(ColNome & " LIKE '%" & Filtro & "%'").ToList
+                                       Dim Q As String = ""
+
+                                       For Each C As DataGridViewTextBoxColumn In DGV_Centrale.Columns
+                                           Q &= C.HeaderCell.Value & " LIKE '%" & Filtro & "%' OR "
+                                       Next
+
+                                       Q = Q.Remove(Q.Length - 3, 2).Trim()
+
+                                       Rows_Filtrate.AddRange(DT_Contenuto.Select(Q).ToList)
                                    End If
 
+                                   'Aggiunge le righe al datagridview
                                    DGV_Centrale.InvocaMetodoSicuro(Sub() DGV_Centrale.Rows.Clear())
+
+                                   ToolBarBottom.InvocaMetodoSicuro(Sub() Pb_Progresso.Maximum = Rows_Filtrate.Count)
 
                                    For Each R As DataRow In Rows_Filtrate
                                        Dim Celle As New ArrayList From {R(0).ToString}
@@ -184,11 +160,15 @@ Public Class Frm_Principale
                                        Next
 
                                        DGV_Centrale.InvocaMetodoSicuro(Sub() DGV_Centrale.Rows.Add(Celle.ToArray))
+
+                                       ToolBarBottom.InvocaMetodoSicuro(Sub() Pb_Progresso.PerformStep())
                                    Next
 
-                                   If Not String.IsNullOrWhiteSpace(Filtro) Then
-                                       ToolBarTop.InvocaMetodoSicuro(Sub() Cmb_CercaCol.SelectedItem = ColNome)
+                               Catch od As ObjectDisposedException
+                                   If Debugger.IsAttached Then
+                                       MessageBox.Show(od.ToString, "ORRORE")
                                    End If
+                                   Exit Sub
                                Catch ex As Exception
                                    Throw New Exception(ex.Message, ex)
                                End Try
@@ -196,13 +176,15 @@ Public Class Frm_Principale
 
             Crono.Stop()
             Lbl_TempoImpegato.Text = "Impiegati " & Math.Round(Crono.Elapsed.TotalSeconds, 1) &
-                " secondi per leggere ed elaborare un file di " & FiSi.ToSize(1)
+                " secondi per elaborare un file di " & FiSi.ToSize(1)
         Catch ex As Exception
             Lbl_Stato.Text = "Errore elaborazione!"
             Lbl_Stato.ForeColor = Color.Crimson
             MessageBox.Show(ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             ToolBarTop.Enabled = True
+            Txt_Cerca.Text = ""
+            Lbl_TotRighe.Text = "Righe totali: " & DGV_Centrale.Rows.Count
             If Not Lbl_Stato.Text = "Errore elaborazione!" Then
                 Lbl_Stato.Text = "Elaborazione completata!"
                 Lbl_Stato.ForeColor = Color.ForestGreen

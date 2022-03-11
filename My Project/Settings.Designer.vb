@@ -65,18 +65,6 @@ Namespace My
                 Me("Dimensioni") = value
             End Set
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
-        Public Property Fullscreen() As Short
-            Get
-                Return CType(Me("Fullscreen"),Short)
-            End Get
-            Set
-                Me("Fullscreen") = value
-            End Set
-        End Property
     End Class
 End Namespace
 

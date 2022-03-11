@@ -12,7 +12,7 @@ Module Mdl_Funzioni
     Private Delegate Function InvokeThreadSafeFunctionDelegate(Of T)(ByVal C As Control, ByVal F As Expression(Of Func(Of T))) As T
 
     <Extension()>
-    Public Sub InvocaMetodoSicuro(ByVal C As Control, ByVal M As Expression(Of Action))
+    Friend Sub InvocaMetodoSicuro(ByVal C As Control, ByVal M As Expression(Of Action))
         If C.InvokeRequired Then
             Dim D = New InvokeThreadSafeMethodDelegate(AddressOf InvocaMetodoSicuro)
             C.Invoke(D, C, M)
@@ -22,7 +22,7 @@ Module Mdl_Funzioni
     End Sub
 
     <Extension()>
-    Public Function InvocaFunzioneSicuro(Of T)(ByVal C As Control, ByVal F As Expression(Of Func(Of T))) As T
+    Friend Function InvocaFunzioneSicuro(Of T)(ByVal C As Control, ByVal F As Expression(Of Func(Of T))) As T
         If C.InvokeRequired Then
             Dim D = New InvokeThreadSafeFunctionDelegate(Of T)(AddressOf InvocaFunzioneSicuro)
             Return DirectCast(C.Invoke(D, C, F), T)
@@ -32,7 +32,7 @@ Module Mdl_Funzioni
     End Function
 
     <Extension()>
-    Sub DoubleBuffering(ByVal Controllo As Control, ByVal Abilita As Boolean)
+    Friend Sub DoubleBuffering(ByVal Controllo As Control, ByVal Abilita As Boolean)
         Dim DoubleBufferPropertyInfo = Controllo.[GetType]().GetProperty("DoubleBuffered", Reflection.BindingFlags.Instance Or Reflection.BindingFlags.NonPublic)
         DoubleBufferPropertyInfo.SetValue(Controllo, Abilita, Nothing)
     End Sub
@@ -51,6 +51,12 @@ Module Mdl_Funzioni
     End Function
 
 #End Region
+
+
+    Sub New()
+
+
+    End Sub
 
     Friend Function PulisciFatture(PathFile As String) As List(Of String)
         Try
@@ -73,7 +79,7 @@ Module Mdl_Funzioni
                     For L As Integer = 0 To TempSplit.Count - 1
                         Dim LineaElab As String = TempSplit(L).Trim
 
-                        TmpLst.Add(LineaElab)
+                        If Not String.IsNullOrWhiteSpace(LineaElab) Then TmpLst.Add(LineaElab)
                     Next
                 End Using
             End Using
