@@ -1,7 +1,6 @@
-# 🦹‍♂️ Argoniano
-Visualizzatore backup piattaforma Argo.
-
 In pratica apre i file di backup (TXT) della piattaforma Argo e li sistema per una migliore visualizzazione, oltre ad offrire una ricerca più completa.
+
+Per ulteriori informazioni o richieste: [Contattami](https://github.com/RallyTuning)
 
 ---
 ### 🖼️ Screenshots
