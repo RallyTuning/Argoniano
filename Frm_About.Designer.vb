@@ -44,10 +44,10 @@ Partial Class Frm_About
         '
         'Label1
         '
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 17.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(82, 12)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(234, 42)
+        Me.Label1.Size = New System.Drawing.Size(190, 42)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Argoniano"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -57,7 +57,7 @@ Partial Class Frm_About
         Me.Lbl_Versione.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Lbl_Versione.Location = New System.Drawing.Point(82, 54)
         Me.Lbl_Versione.Name = "Lbl_Versione"
-        Me.Lbl_Versione.Size = New System.Drawing.Size(233, 22)
+        Me.Lbl_Versione.Size = New System.Drawing.Size(190, 22)
         Me.Lbl_Versione.TabIndex = 2
         Me.Lbl_Versione.Text = "v 0.0"
         Me.Lbl_Versione.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -65,60 +65,64 @@ Partial Class Frm_About
         'Label2
         '
         Me.Label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label2.Location = New System.Drawing.Point(12, 233)
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(12, 222)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(304, 202)
+        Me.Label2.Size = New System.Drawing.Size(260, 130)
         Me.Label2.TabIndex = 3
         Me.Label2.Text = resources.GetString("Label2.Text")
         '
         'Lnk_Email
         '
-        Me.Lnk_Email.AutoSize = True
+        Me.Lnk_Email.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Lnk_Email.LinkColor = System.Drawing.Color.Green
-        Me.Lnk_Email.Location = New System.Drawing.Point(12, 199)
+        Me.Lnk_Email.Location = New System.Drawing.Point(12, 192)
         Me.Lnk_Email.Name = "Lnk_Email"
-        Me.Lnk_Email.Size = New System.Drawing.Size(174, 20)
+        Me.Lnk_Email.Size = New System.Drawing.Size(260, 20)
         Me.Lnk_Email.TabIndex = 4
         Me.Lnk_Email.TabStop = True
         Me.Lnk_Email.Text = "gianluigi@capozzoli.me"
+        Me.Lnk_Email.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Lnk_Capozzoli
         '
-        Me.Lnk_Capozzoli.AutoSize = True
+        Me.Lnk_Capozzoli.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Lnk_Capozzoli.LinkColor = System.Drawing.Color.BlueViolet
-        Me.Lnk_Capozzoli.Location = New System.Drawing.Point(12, 167)
+        Me.Lnk_Capozzoli.Location = New System.Drawing.Point(12, 160)
         Me.Lnk_Capozzoli.Name = "Lnk_Capozzoli"
-        Me.Lnk_Capozzoli.Size = New System.Drawing.Size(138, 20)
+        Me.Lnk_Capozzoli.Size = New System.Drawing.Size(125, 20)
         Me.Lnk_Capozzoli.TabIndex = 5
         Me.Lnk_Capozzoli.TabStop = True
         Me.Lnk_Capozzoli.Text = "www.capozzoli.me"
+        Me.Lnk_Capozzoli.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Lnk_Disactive
         '
         Me.Lnk_Disactive.ActiveLinkColor = System.Drawing.Color.Navy
-        Me.Lnk_Disactive.AutoSize = True
+        Me.Lnk_Disactive.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Lnk_Disactive.LinkColor = System.Drawing.Color.Red
-        Me.Lnk_Disactive.Location = New System.Drawing.Point(175, 167)
+        Me.Lnk_Disactive.Location = New System.Drawing.Point(147, 160)
         Me.Lnk_Disactive.Name = "Lnk_Disactive"
-        Me.Lnk_Disactive.Size = New System.Drawing.Size(141, 20)
+        Me.Lnk_Disactive.Size = New System.Drawing.Size(125, 20)
         Me.Lnk_Disactive.TabIndex = 6
         Me.Lnk_Disactive.TabStop = True
         Me.Lnk_Disactive.Text = "www.disactive.com"
+        Me.Lnk_Disactive.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label3
         '
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.Location = New System.Drawing.Point(12, 89)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(304, 62)
+        Me.Label3.Size = New System.Drawing.Size(260, 62)
         Me.Label3.TabIndex = 7
         Me.Label3.Text = "Creato with ♥ da Gianluigi Capozzoli" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Per il Liceo Ettore Majorana di Rho (MI)"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Frm_About
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(328, 444)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
+        Me.ClientSize = New System.Drawing.Size(284, 361)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Lnk_Disactive)
         Me.Controls.Add(Me.Lnk_Capozzoli)
@@ -132,13 +136,11 @@ Partial Class Frm_About
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "Frm_About"
-        Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "About that shit"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 

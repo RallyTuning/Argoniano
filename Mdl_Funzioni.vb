@@ -55,7 +55,6 @@ Module Mdl_Funzioni
 
     Sub New()
 
-
     End Sub
 
     Friend Function PulisciFatture(PathFile As String) As List(Of String)
@@ -87,6 +86,27 @@ Module Mdl_Funzioni
             Return TmpLst
         Catch ex As Exception
             Return New List(Of String)
+        End Try
+    End Function
+
+    <Extension()>
+    Friend Function HaCaratteriSpecialissimi(S As String) As Boolean
+        Return S.Any(Function(C) Not (Char.IsLetterOrDigit(C) OrElse Char.IsWhiteSpace(C)))
+    End Function
+
+    <Extension()>
+    Friend Function NormalizzaNome(S As String) As String
+        Try
+            Dim R As String = String.Empty
+
+            If S.Contains("_") Then
+                Dim SS() As String = S.Split("_")
+                R = S.Replace(SS(0) & "_", String.Empty)
+            End If
+
+            Return R.Replace("_", " ")
+        Catch ex As Exception
+            Return S
         End Try
     End Function
 

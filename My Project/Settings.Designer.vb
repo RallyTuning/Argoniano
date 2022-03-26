@@ -65,6 +65,30 @@ Namespace My
                 Me("Dimensioni") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property FullScreen() As Boolean
+            Get
+                Return CType(Me("FullScreen"),Boolean)
+            End Get
+            Set
+                Me("FullScreen") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property PathBackup() As String
+            Get
+                Return CType(Me("PathBackup"),String)
+            End Get
+            Set
+                Me("PathBackup") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
