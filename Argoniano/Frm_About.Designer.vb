@@ -26,11 +26,11 @@ Partial Class Frm_About
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Lbl_Versione = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.Lnk_Email = New System.Windows.Forms.LinkLabel()
         Me.Lnk_Capozzoli = New System.Windows.Forms.LinkLabel()
         Me.Lnk_Disactive = New System.Windows.Forms.LinkLabel()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -61,16 +61,6 @@ Partial Class Frm_About
         Me.Lbl_Versione.TabIndex = 2
         Me.Lbl_Versione.Text = "v 0.0"
         Me.Lbl_Versione.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label2
-        '
-        Me.Label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(12, 222)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(260, 130)
-        Me.Label2.TabIndex = 3
-        Me.Label2.Text = resources.GetString("Label2.Text")
         '
         'Lnk_Email
         '
@@ -119,15 +109,25 @@ Partial Class Frm_About
         Me.Label3.Text = "Creato with ♥ da Gianluigi Capozzoli" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Per il Liceo Ettore Majorana di Rho (MI)"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'RichTextBox1
+        '
+        Me.RichTextBox1.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.RichTextBox1.Location = New System.Drawing.Point(12, 226)
+        Me.RichTextBox1.Name = "RichTextBox1"
+        Me.RichTextBox1.ReadOnly = True
+        Me.RichTextBox1.Size = New System.Drawing.Size(260, 123)
+        Me.RichTextBox1.TabIndex = 8
+        Me.RichTextBox1.Text = resources.GetString("RichTextBox1.Text")
+        '
         'Frm_About
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(284, 361)
+        Me.Controls.Add(Me.RichTextBox1)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Lnk_Disactive)
         Me.Controls.Add(Me.Lnk_Capozzoli)
         Me.Controls.Add(Me.Lnk_Email)
-        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Lbl_Versione)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.PictureBox1)
@@ -147,9 +147,9 @@ Partial Class Frm_About
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Lbl_Versione As Label
-    Friend WithEvents Label2 As Label
     Friend WithEvents Lnk_Email As LinkLabel
     Friend WithEvents Lnk_Capozzoli As LinkLabel
     Friend WithEvents Lnk_Disactive As LinkLabel
     Friend WithEvents Label3 As Label
+    Friend WithEvents RichTextBox1 As RichTextBox
 End Class

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Argoniano", "Argoniano.vbproj", "{9AC65BCF-9AD5-4CD8-8F16-6BD87C7DC7A3}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Argoniano", "Argoniano/Argoniano.vbproj", "{9AC65BCF-9AD5-4CD8-8F16-6BD87C7DC7A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
