@@ -5,7 +5,7 @@ In pratica apre i file di backup (TXT) della piattaforma Argo e li sistema per u
 
 Per ulteriori informazioni o richieste: [Contattami](https://github.com/RallyTuning)
 
-[![GitHub all releases](https://img.shields.io/github/downloads/rallytuning/argoniano/total?color=green&label=Download&logo=github&style=flat-square)](https://github.com/RallyTuning/Argoniano/releases/download/1.3/Argoniano.exe)
+[![GitHub all releases](https://img.shields.io/github/downloads/rallytuning/argoniano/total?color=green&label=Download&logo=github&style=flat-square)](https://github.com/RallyTuning/Argoniano/releases)
 
 ---
 ### 🖼️ Screenshots
